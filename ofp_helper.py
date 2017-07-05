@@ -11,12 +11,14 @@ def add_flow(datapath, priority, match, actions, buffer_id=None):
                                 buffer_id=buffer_id,
                                 priority=priority,
                                 match=match,
-                                instructions=inst)
+                                instructions=inst,
+                                idle_timeout=120)
     else:
         mod = parser.OFPFlowMod(datapath=datapath,
                                 priority=priority,
                                 match=match,
-                                instructions=inst)
+                                instructions=inst,
+                                idle_timeout=120)
     datapath.send_msg(mod)
 
 
