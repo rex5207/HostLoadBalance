@@ -61,7 +61,7 @@ class SimpleSwitch13(app_manager.RyuApp):
         actions = [parser.OFPActionSetField(ipv4_dst=new_dst_ip),
                    parser.OFPActionSetField(eth_dst=new_dst_mac),
                    parser.OFPActionOutput(new_dst_port)]
-        ofp_helper.add_flow(datapath, 100, match, actions)
+        ofp_helper.add_flow(datapath, 200, match, actions)
 
         # Set Packet header from Server 1 to Server 2 for SYN_ACK
         match_back = parser.OFPMatch(eth_type=ether.ETH_TYPE_IP,
@@ -71,7 +71,7 @@ class SimpleSwitch13(app_manager.RyuApp):
         actions_back = [parser.OFPActionSetField(ipv4_src=old_dst_ip),
                         parser.OFPActionSetField(eth_src=old_dst_mac),
                         parser.OFPActionOutput(1)]
-        ofp_helper.add_flow(datapath, 100, match_back, actions_back)
+        ofp_helper.add_flow(datapath, 200, match_back, actions_back)
 
         ofp_helper.send_packet_out(msg, in_port, actions)
 
